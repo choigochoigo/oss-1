@@ -7,7 +7,7 @@ jobs:
     name: Returns the number square
     steps:
       -name: Checkout
-       uses: actions/checkout@v4
+       uses: actions/checkout.v4
      -name: Fetch num sqaured
       id: get_square
       uses: ./ 
