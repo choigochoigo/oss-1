@@ -1,0 +1,29 @@
+#action.yml
+name: 'CUSTOM GITHUB ACTION'
+description: 'A GITHUB ACTION  that takes an input and returns the square  of the number'
+inputs: 
+  num:
+    description: 'Enter the number'
+    requried: true
+    deflault: "1"
+outputs: 
+  num_squared:
+    value:${{ steps.get-square.outputs.num_squared}}
+runs:
+  using:'composite'
+  steps:
+    -name:Install Python
+    uses: actions/setup-Python@v4
+    with:
+      python-version:'3.10'
+    -name:Install Dependencies
+     run:pip install -r requirements.txt
+     shall: bash
+    -name:Pass Inputs to Shell
+     run: |
+      echo "INPUT_NUM=${{ inputs.num }} >> $GITHUB.ENV
+      shell :bash
+      -name: Fetch the number's square
+      id: get-sqaure
+      run: python src/get_num_sqaure.py
+      shell: bash
